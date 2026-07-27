@@ -1,16 +1,12 @@
 # CNN-BiLSTM-Dual-Attention-ECG-Classification
 
-### 📓 Open notebooks in Colab
-
-| Notebook | Link |
-|---|---|
-| Part A — Setup | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/rj05-ux/CNN-BiLSTM-Dual-Attention-ECG-Classification/blob/main/notebooks/PartA_Setup.ipynb) |
-| Part B — Preprocessing | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/rj05-ux/CNN-BiLSTM-Dual-Attention-ECG-Classification/blob/main/notebooks/PartB_Preprocessing.ipynb) |
-| Part C — EMD Features | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/rj05-ux/CNN-BiLSTM-Dual-Attention-ECG-Classification/blob/main/notebooks/PartC_EMD_Features.ipynb) |
-| Part D — Split & MRMR | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/rj05-ux/CNN-BiLSTM-Dual-Attention-ECG-Classification/blob/main/notebooks/PartD_Split_MRMR.ipynb) |
-| Part E — Deep Models | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/rj05-ux/CNN-BiLSTM-Dual-Attention-ECG-Classification/blob/main/notebooks/PartE_DeepModels.ipynb) |
-| Part F — Ensemble/Optuna/SHAP | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/rj05-ux/CNN-BiLSTM-Dual-Attention-ECG-Classification/blob/main/notebooks/PartF_Ensemble_Optuna_SHAP_DL.ipynb) |
-| Part G — INCART External Validation | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/rj05-ux/CNN-BiLSTM-Dual-Attention-ECG-Classification/blob/main/notebooks/PartG_INCART_External_Validation.ipynb) |
+- [Part A — Setup](https://colab.research.google.com/github/rj05-ux/CNN-BiLSTM-Dual-Attention-ECG-Classification/blob/main/notebooks/PartA_Setup.ipynb)
+- [Part B — Preprocessing](https://colab.research.google.com/github/rj05-ux/CNN-BiLSTM-Dual-Attention-ECG-Classification/blob/main/notebooks/PartB_Preprocessing.ipynb)
+- [Part C — EMD Features](https://colab.research.google.com/github/rj05-ux/CNN-BiLSTM-Dual-Attention-ECG-Classification/blob/main/notebooks/PartC_EMD_Features.ipynb)
+- [Part D — Split & MRMR](https://colab.research.google.com/github/rj05-ux/CNN-BiLSTM-Dual-Attention-ECG-Classification/blob/main/notebooks/PartD_Split_MRMR.ipynb)
+- [Part E — Deep Models](https://colab.research.google.com/github/rj05-ux/CNN-BiLSTM-Dual-Attention-ECG-Classification/blob/main/notebooks/PartE_DeepModels.ipynb)
+- [Part F — Ensemble/Optuna/SHAP](https://colab.research.google.com/github/rj05-ux/CNN-BiLSTM-Dual-Attention-ECG-Classification/blob/main/notebooks/PartF_Ensemble_Optuna_SHAP_DL.ipynb)
+- [Part G — INCART External Validation](https://colab.research.google.com/github/rj05-ux/CNN-BiLSTM-Dual-Attention-ECG-Classification/blob/main/notebooks/PartG_INCART_External_Validation.ipynb)
 [![Python](https://img.shields.io/badge/Python-3.9%2B-blue)](https://python.org)
 [![TensorFlow](https://img.shields.io/badge/TensorFlow-2.x-orange)](https://tensorflow.org)
 [![Dataset](https://img.shields.io/badge/Dataset-MIT--BIH%20%7C%20INCART-red)](https://physionet.org/content/mitdb/1.0.0/)
