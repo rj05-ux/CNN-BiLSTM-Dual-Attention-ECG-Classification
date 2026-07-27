@@ -7,7 +7,7 @@
 - Part E — Deep Models [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/rj05-ux/CNN-BiLSTM-Dual-Attention-ECG-Classification/blob/main/notebooks/PartE_DeepModels.ipynb)
 - Part F — Ensemble/Optuna/SHAP [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/rj05-ux/CNN-BiLSTM-Dual-Attention-ECG-Classification/blob/main/notebooks/PartF_Ensemble_Optuna_SHAP_DL.ipynb)
 - Part G — INCART External Validation [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/rj05-ux/CNN-BiLSTM-Dual-Attention-ECG-Classification/blob/main/notebooks/PartG_INCART_External_Validation.ipynb)
-![Python](https://img.shields.io/badge/Python-3.9%2B-blue) ![TensorFlow](https://img.shields.io/badge/TensorFlow-2.x-orange) ![Dataset](https://img.shields.io/badge/Dataset-MIT--BIH%20%7C%20INCART-red) ![License](https://img.shields.io/badge/License-MIT-yellow)
+
 [![Python](https://img.shields.io/badge/Python-3.9%2B-blue)](https://python.org)
 [![TensorFlow](https://img.shields.io/badge/TensorFlow-2.x-orange)](https://tensorflow.org)
 [![Dataset](https://img.shields.io/badge/Dataset-MIT--BIH%20%7C%20INCART-red)](https://physionet.org/content/mitdb/1.0.0/)
