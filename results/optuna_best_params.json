@@ -1,0 +1,11 @@
+{
+  "best_value": 0.30073828613249237,
+  "best_params": {
+    "dropout": 0.249816047538945,
+    "lstm1": 32,
+    "lstm2": 16,
+    "conv1_filters": 32,
+    "conv2_filters": 64,
+    "lr": 0.0011114989443094978
+  }
+}
