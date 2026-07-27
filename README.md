@@ -1,4 +1,4 @@
-# ECG Arrhythmia Classification
+# CNN-BiLSTM-Dual-Attention-ECG-Classification
 
 ## Multi-Scale CNN-BiLSTM with Dual Attention — Inter-Patient Evaluation on MIT-BIH & INCART
 
