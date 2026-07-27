@@ -12,9 +12,9 @@ This is the code behind our paper, **"An Efficient Multi-Scale CNN-BiLSTM with D
 
 ## What this actually does
 
-Most papers on ECG beat classification split their data randomly, which lets the same patient's heartbeats leak into both the train and test sets — that inflates accuracy and doesn't reflect how the model would perform on a new patient. This project uses the stricter **inter-patient protocol** (DS1/DS2 split from MIT-BIH), so training and testing sets never share a patient.
+Most papers on ECG beat classification split their data randomly, which lets the same patient's heartbeats leak into both the train and test sets; this inflates accuracy and doesn't reflect how the model would perform on a new patient. This project uses the stricter **inter-patient protocol** (DS1/DS2 split from MIT-BIH), so training and testing sets never share a patient.
 
-The pipeline classifies beats into the 5 AAMI classes — N, S, V, F, Q — and goes through:
+The pipeline classifies beats into the 5 AAMI classes — N, S, V, F, Q and goes through:
 
 - EMD-based feature extraction from raw beats, with MRMR feature selection
 - S-class targeted SMOTE to handle the class imbalance (S and F beats make up less than 3% of the data combined)
@@ -39,7 +39,7 @@ On MIT-BIH, inter-patient (DS1 → DS2 test set):
 
 On INCART (external, out-of-distribution): accuracy 82.00%, **macro-F1 = 0.3578**.
 
-I'm reporting that drop as-is rather than glossing over it. It's a real and expected consequence of domain shift — different lead setup, different patient population, different sampling rate (resampled 257→360 Hz), different annotators — and it's exactly the kind of honest generalization gap that gets left out of a lot of papers claiming "cross-dataset validation."
+I'm reporting that drop as-is rather than glossing over it. It's a real and expected consequence of domain shift, different lead setup, different patient population, different sampling rate (resampled 257→360 Hz), and different annotators, and it's exactly the kind of honest generalization gap that gets left out of a lot of papers claiming "cross-dataset validation."
 
 ## Repo structure
 
@@ -59,7 +59,7 @@ requirements.txt
 LICENSE
 ```
 
-Notebooks are meant to be run in order — each one picks up saved features/splits/models from the one before it.
+Notebooks are meant to be run in order each one picks up saved features/splits/models from the one before it.
 
 ## Running it
 
