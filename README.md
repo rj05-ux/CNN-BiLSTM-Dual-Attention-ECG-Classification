@@ -1,6 +1,12 @@
 # ECG Arrhythmia Classification
 
-Inter-patient ECG arrhythmia classification using a multi-scale CNN-BiLSTM with dual attention, evaluated on MIT-BIH and INCART.
+## Multi-Scale CNN-BiLSTM with Dual Attention — Inter-Patient Evaluation on MIT-BIH & INCART
+
+[![Python](https://img.shields.io/badge/Python-3.9%2B-blue)](https://python.org)
+[![TensorFlow](https://img.shields.io/badge/TensorFlow-2.x-orange)](https://tensorflow.org)
+[![Dataset](https://img.shields.io/badge/Dataset-MIT--BIH%20%7C%20INCART-red)](https://physionet.org/content/mitdb/1.0.0/)
+[![License](https://img.shields.io/badge/License-MIT-yellow)](LICENSE)
+
 
 This is the code behind our paper, **"An Efficient Multi-Scale CNN-BiLSTM with Dual Attention Mechanism for Inter-Patient ECG Arrhythmia Classification: Evaluation on MIT-BIH and INCART Databases,"** published in JETIR (Vol. 13, Issue 7, July 2026). [Read it here](http://www.jetir.org/view?paper=JETIR2607122).
 
