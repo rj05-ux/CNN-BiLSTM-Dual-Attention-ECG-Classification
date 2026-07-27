@@ -1,7 +1,5 @@
 # CNN-BiLSTM-Dual-Attention-ECG-Classification
 
-## Multi-Scale CNN-BiLSTM with Dual Attention — Inter-Patient Evaluation on MIT-BIH & INCART
-
 [![Python](https://img.shields.io/badge/Python-3.9%2B-blue)](https://python.org)
 [![TensorFlow](https://img.shields.io/badge/TensorFlow-2.x-orange)](https://tensorflow.org)
 [![Dataset](https://img.shields.io/badge/Dataset-MIT--BIH%20%7C%20INCART-red)](https://physionet.org/content/mitdb/1.0.0/)
@@ -43,7 +41,7 @@ I'm reporting that drop as-is rather than glossing over it. It's a real and expe
 
 ## Repo structure
 ```
-ecg-arrhythmia-classification/
+CNN-BiLSTM-Dual-Attention-ECG-Classification/
 ├── notebooks/
 │   ├── PartA_Setup.ipynb                        # env setup, dataset download, AAMI mapping
 │   ├── PartB_Preprocessing.ipynb                # denoising, R-peak detection, beat segmentation
@@ -64,8 +62,8 @@ Notebooks are meant to be run in order each one picks up saved features/splits/m
 ## Running it
 
 ```bash
-git clone https://github.com/rj05-ux/ECG-arrhythmia-classification.git
-cd ecg-arrhythmia-classification
+git clone https://github.com/rj05-ux/CNN-BiLSTM-Dual-Attention-ECG-Classification.git
+cd CNN-BiLSTM-Dual-Attention-ECG-Classification
 pip install -r requirements.txt
 ```
 
