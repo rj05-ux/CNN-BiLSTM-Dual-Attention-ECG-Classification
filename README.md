@@ -42,7 +42,7 @@ On INCART (external, out-of-distribution): accuracy 82.00%, **macro-F1 = 0.3578*
 I'm reporting that drop as-is rather than glossing over it. It's a real and expected consequence of domain shift, different lead setup, different patient population, different sampling rate (resampled 257→360 Hz), and different annotators, and it's exactly the kind of honest generalization gap that gets left out of a lot of papers claiming "cross-dataset validation."
 
 ## Repo structure
-
+```
 ecg-arrhythmia-classification/
 ├── notebooks/
 │   ├── PartA_Setup.ipynb                        # env setup, dataset download, AAMI mapping
@@ -57,6 +57,7 @@ ecg-arrhythmia-classification/
 ├── figures/          # confusion matrices, SHAP plots, training curves
 ├── requirements.txt
 └── LICENSE
+```
 
 Notebooks are meant to be run in order each one picks up saved features/splits/models from the one before it.
 
