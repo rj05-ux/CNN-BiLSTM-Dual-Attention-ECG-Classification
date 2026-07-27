@@ -35,9 +35,8 @@ best_*.keras
 model_*.keras
 
 # Generated outputs (re-creatable)
-results/*.csv
-figures/*.png
-figures/*.pdf
+incart/
+checkpoints/
 
 # OS
 .DS_Store
