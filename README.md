@@ -64,7 +64,7 @@ Notebooks are meant to be run in order each one picks up saved features/splits/m
 ## Running it
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/ecg-arrhythmia-classification.git
+git clone https://github.com/rj05-ux/ECG-arrhythmia-classification.git
 cd ecg-arrhythmia-classification
 pip install -r requirements.txt
 ```
