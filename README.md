@@ -15,7 +15,7 @@
 
 
 This is the code behind our paper, **"An Efficient Multi-Scale CNN-BiLSTM with Dual Attention Mechanism for Inter-Patient ECG Arrhythmia Classification: Evaluation on MIT-BIH and INCART Databases,"** published in JETIR (Vol. 13, Issue 7, July 2026). [Read it here](http://www.jetir.org/view?paper=JETIR2607122).
-[Publication certificate](docs/certificate.png)
+[Publication certificate](docs/JETIR2607122_Certificate_page-0001.jpg)
 
 ## What this actually does
 
