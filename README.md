@@ -1,116 +1,78 @@
-# 🫀 ECG Arrhythmia Classification
+# ECG Arrhythmia Classification
 
-## Multi-Scale CNN-BiLSTM with Dual Attention — Inter-Patient Evaluation on MIT-BIH & INCART
+Inter-patient ECG arrhythmia classification using a multi-scale CNN-BiLSTM with dual attention, evaluated on MIT-BIH and INCART.
 
-[![Python](https://img.shields.io/badge/Python-3.9%2B-blue)](https://python.org)
-[![TensorFlow](https://img.shields.io/badge/TensorFlow-2.x-orange)](https://tensorflow.org)
-[![Dataset](https://img.shields.io/badge/Dataset-MIT--BIH%20%7C%20INCART-red)](https://physionet.org/content/mitdb/1.0.0/)
-[![License](https://img.shields.io/badge/License-MIT-yellow)](LICENSE)
+This is the code behind our paper, **"An Efficient Multi-Scale CNN-BiLSTM with Dual Attention Mechanism for Inter-Patient ECG Arrhythmia Classification: Evaluation on MIT-BIH and INCART Databases,"** published in JETIR (Vol. 13, Issue 7, July 2026). [Read it here](http://www.jetir.org/view?paper=JETIR2607122).
 
----
+## What this actually does
 
-## 📌 Overview
+Most papers on ECG beat classification split their data randomly, which lets the same patient's heartbeats leak into both the train and test sets — that inflates accuracy and doesn't reflect how the model would perform on a new patient. This project uses the stricter **inter-patient protocol** (DS1/DS2 split from MIT-BIH), so training and testing sets never share a patient.
 
-This repository contains the full implementation behind our published paper:
+The pipeline classifies beats into the 5 AAMI classes — N, S, V, F, Q — and goes through:
 
-> **"An Efficient Multi-Scale CNN-BiLSTM with Dual Attention Mechanism for Inter-Patient ECG Arrhythmia Classification: Evaluation on MIT-BIH and INCART Databases"**
-> Published in JETIR, Vol. 13, Issue 7 (July 2026) — [Read the paper](http://www.jetir.org/view?paper=JETIR2607122)
+- EMD-based feature extraction from raw beats
+- SMOTE to handle the class imbalance (S and F beats make up less than 3% of the data combined)
+- A few baselines (Random Forest, SVM, LSTM, 1D-CNN) for comparison
+- The main model: a multi-scale CNN-BiLSTM with dual attention
+- Ensembling (soft-voting, Optuna-weighted voting, stacking) and Optuna hyperparameter tuning
+- SHAP and saliency-based explainability, so it's not just a black box
+- External validation on INCART, a completely different 12-lead dataset, to see how well it actually generalizes
 
-The pipeline classifies ECG heartbeats into the **5 AAMI classes (N, S, V, F, Q)** under the strict **inter-patient protocol** (DS1/DS2 split, zero patient overlap between train and test — the evaluation standard that most published work gets wrong). It combines:
+## Results
 
-- **EMD-based feature extraction** from raw beats
-- **SMOTE** to handle severe class imbalance (S and F classes are <3% of the dataset)
-- **Classical ML baselines** (Random Forest, SVM) and **deep models** (1D-CNN, LSTM, multi-scale CNN-BiLSTM with dual attention)
-- **Ensembling** (soft-voting, Optuna-weighted voting, stacking) + **Optuna hyperparameter tuning**
-- **SHAP explainability** and gradient-based temporal saliency
-- **External validation on INCART** (St. Petersburg 12-lead database) to test cross-dataset generalization
-
----
-
-## 📊 Results
-
-### MIT-BIH, inter-patient (DS1 train / DS2 test), 5-class AAMI
+On MIT-BIH, inter-patient (DS1 → DS2):
 
 | Model | Accuracy | Macro-F1 |
 |---|---|---|
 | Random Forest | 92.93% | 0.520 |
 | SVM | — | 0.710 (best S-class sensitivity) |
 | LSTM | 64.83% | — |
-| 1D-CNN | **88.25%** | 0.530 |
-| CNN-BiLSTM (Optuna-tuned) | — | 0.672 (up from 0.630 pre-tuning) |
-| **Stacking Ensemble (best)** | **94.45%** | **76.66%** |
+| 1D-CNN | 88.25% | 0.530 |
+| CNN-BiLSTM (Optuna-tuned) | — | 0.672 |
+| **Stacking ensemble (best overall)** | **94.45%** | **76.66%** |
 
-### External validation — INCART (out-of-distribution)
+On INCART (external, out-of-distribution): macro-F1 drops to **35.79%**.
 
-| Metric | Value |
-|---|---|
-| Macro-F1 on INCART | **35.79%** |
+I'm reporting that drop as-is rather than glossing over it. It's a real and expected consequence of domain shift — different lead setup, different patient population, different annotation process — and it's exactly the kind of honest generalization gap that gets left out of a lot of papers claiming "cross-dataset validation."
 
-The drop from 76.66% (MIT-BIH) to 35.79% (INCART) is expected and reported honestly — it reflects genuine domain shift (different lead configuration, population, and annotation protocol), not a pipeline error.
-
----
-
-## 📁 Repository Structure
+## Repo structure
 
 ```
-ecg-arrhythmia-classification/
-│
-├── notebooks/
-│   ├── PartA_Setup.ipynb                          ← Environment, dataset download, AAMI mapping
-│   ├── PartB_Preprocessing.ipynb                  ← Denoising, R-peak detection, beat segmentation
-│   ├── PartC_EMD_Features.ipynb                   ← EMD decomposition, feature extraction
-│   ├── PartD_Split_MRMR.ipynb                     ← Inter-patient DS1/DS2 split, MRMR selection, SMOTE
-│   ├── PartE_DeepModels.ipynb                     ← 1D-CNN, LSTM, multi-scale CNN-BiLSTM w/ dual attention
-│   ├── PartF_Ensemble_Optuna_SHAP.ipynb           ← Ensembling, Optuna tuning, SHAP + saliency, PTB-XL screening check
-│   └── PartG_INCART_External_Validation.ipynb     ← Full external validation on INCART
-│
-├── results/            ← Saved metrics, results tables
-├── figures/             ← Confusion matrices, SHAP plots, training curves
-├── requirements.txt
-├── .gitignore
-├── LICENSE
-└── README.md
+notebooks/
+  PartA_Setup.ipynb                       – env setup, dataset download, AAMI mapping
+  PartB_Preprocessing.ipynb               – denoising, R-peak detection, beat segmentation
+  PartC_EMD_Features.ipynb                – EMD decomposition, feature extraction
+  PartD_Split_MRMR.ipynb                  – inter-patient DS1/DS2 split, MRMR, SMOTE
+  PartE_DeepModels.ipynb                  – 1D-CNN, LSTM, CNN-BiLSTM w/ dual attention
+  PartF_Ensemble_Optuna_SHAP.ipynb        – ensembling, Optuna tuning, SHAP, PTB-XL screening
+  PartG_INCART_External_Validation.ipynb  – full external validation on INCART
+
+results/    – saved metrics
+figures/    – confusion matrices, SHAP plots, training curves
+requirements.txt
+LICENSE
 ```
 
----
+Notebooks are meant to be run in order — each one picks up saved features/splits/models from the one before it.
 
-## 🚀 Quick Start
+## Running it
 
-### 1. Clone the repository
 ```bash
 git clone https://github.com/YOUR_USERNAME/ecg-arrhythmia-classification.git
 cd ecg-arrhythmia-classification
-```
-
-### 2. Install dependencies
-```bash
 pip install -r requirements.txt
 ```
 
-### 3. Run on Google Colab (recommended — GPU needed for Part E onward)
-Open notebooks in order with **Runtime → Change runtime type → T4 GPU** enabled.
+Best run on Google Colab with a GPU (Part E onward needs one) — `Runtime → Change runtime type → T4 GPU`.
 
-### 4. Run notebooks in order
-```
-PartA → PartB → PartC → PartD → PartE → PartF → PartG
-```
-Each notebook picks up saved artifacts from the previous one (features, splits, trained models) via a shared `PROJECT_DIR`.
+## Datasets
 
----
+- **MIT-BIH Arrhythmia Database** — 48 records, 47 subjects, 360 Hz. Used for training and the inter-patient test. Downloaded automatically in Part A via `wfdb`.
+- **INCART Database** — St. Petersburg 12-lead Arrhythmia Database. Used only in Part G, for external validation.
 
-## 📦 Datasets
+AAMI class mapping:
 
-**MIT-BIH Arrhythmia Database** (primary, training + inter-patient test)
-- 48 records, 47 subjects, 360 Hz, ~30 min/record
-- Downloaded automatically in Part A via `wfdb`
-
-**INCART Database** (external validation only, Part G)
-- St. Petersburg 12-lead Arrhythmia Database
-- Used to test generalization to an independently-annotated, differently-collected dataset
-
-### AAMI EC57 Class Mapping
-
-| Class | MIT-BIH Symbols | Clinical Meaning |
+| Class | MIT-BIH symbols | Meaning |
 |---|---|---|
 | N | N, L, R, e, j | Normal + bundle branch |
 | S | A, a, J, S | Supraventricular ectopic |
@@ -118,9 +80,7 @@ Each notebook picks up saved artifacts from the previous one (features, splits, 
 | F | F | Fusion beats |
 | Q | /, f, Q | Unknown / paced |
 
----
-
-## ⚙️ Requirements
+## Requirements
 
 ```
 wfdb>=4.1.0
@@ -140,11 +100,7 @@ scipy>=1.11.0
 pywavelets>=1.4.1
 ```
 
----
-
-## 📖 Citation
-
-If you use this code in your research, please cite:
+## Citation
 
 ```bibtex
 @article{rutuja2026ecg,
@@ -159,15 +115,11 @@ If you use this code in your research, please cite:
 }
 ```
 
----
+## License
 
-## 📄 License
+MIT — see [LICENSE](LICENSE).
 
-This project is licensed under the MIT License — see [LICENSE](LICENSE) for details.
-
----
-
-## 🙏 Acknowledgements
+## Acknowledgements
 
 - MIT-BIH Arrhythmia Database: Moody GB, Mark RG (PhysioNet)
 - INCART Database: St. Petersburg Institute of Cardiological Technics (PhysioNet)
