@@ -10,30 +10,30 @@ Most papers on ECG beat classification split their data randomly, which lets the
 
 The pipeline classifies beats into the 5 AAMI classes — N, S, V, F, Q — and goes through:
 
-- EMD-based feature extraction from raw beats
-- SMOTE to handle the class imbalance (S and F beats make up less than 3% of the data combined)
-- A few baselines (Random Forest, SVM, LSTM, 1D-CNN) for comparison
-- The main model: a multi-scale CNN-BiLSTM with dual attention
-- Ensembling (soft-voting, Optuna-weighted voting, stacking) and Optuna hyperparameter tuning
+- EMD-based feature extraction from raw beats, with MRMR feature selection
+- S-class targeted SMOTE to handle the class imbalance (S and F beats make up less than 3% of the data combined)
+- Three deep models trained on raw waveforms: a 1D-CNN, a BiLSTM, and the proposed multi-scale CNN-BiLSTM with dual attention
+- Ensembling across those three (soft-voting, Optuna-weighted voting, stacking) and Optuna hyperparameter tuning of the proposed model
 - SHAP and saliency-based explainability, so it's not just a black box
 - External validation on INCART, a completely different 12-lead dataset, to see how well it actually generalizes
 
 ## Results
 
-On MIT-BIH, inter-patient (DS1 → DS2):
+On MIT-BIH, inter-patient (DS1 → DS2 test set):
 
-| Model | Accuracy | Macro-F1 |
-|---|---|---|
-| Random Forest | 92.93% | 0.520 |
-| SVM | — | 0.710 (best S-class sensitivity) |
-| LSTM | 64.83% | — |
-| 1D-CNN | 88.25% | 0.530 |
-| CNN-BiLSTM (Optuna-tuned) | — | 0.672 |
-| **Stacking ensemble (best overall)** | **94.45%** | **76.66%** |
+| Model / Strategy | Accuracy | Macro-F1 | Macro-AUC |
+|---|---|---|---|
+| CNN | 93.27% | 0.7533 | 0.9492 |
+| BiLSTM | 72.43% | 0.5161 | 0.9366 |
+| CNN-BiLSTM (proposed) | 82.62% | 0.5801 | 0.9379 |
+| CNN-BiLSTM (Optuna-tuned) | 85.82% | 0.6712 | 0.9242 |
+| Soft-voting ensemble | 88.12% | 0.6910 | 0.9540 |
+| Weighted-voting ensemble | 93.62% | 0.7578 | 0.9533 |
+| **Stacking ensemble (best overall)** | **94.08%** | **0.7611** | **0.9648** |
 
-On INCART (external, out-of-distribution): macro-F1 drops to **35.79%**.
+On INCART (external, out-of-distribution): accuracy 82.00%, **macro-F1 = 0.3578**.
 
-I'm reporting that drop as-is rather than glossing over it. It's a real and expected consequence of domain shift — different lead setup, different patient population, different annotation process — and it's exactly the kind of honest generalization gap that gets left out of a lot of papers claiming "cross-dataset validation."
+I'm reporting that drop as-is rather than glossing over it. It's a real and expected consequence of domain shift — different lead setup, different patient population, different sampling rate (resampled 257→360 Hz), different annotators — and it's exactly the kind of honest generalization gap that gets left out of a lot of papers claiming "cross-dataset validation."
 
 ## Repo structure
 
@@ -42,8 +42,8 @@ notebooks/
   PartA_Setup.ipynb                       – env setup, dataset download, AAMI mapping
   PartB_Preprocessing.ipynb               – denoising, R-peak detection, beat segmentation
   PartC_EMD_Features.ipynb                – EMD decomposition, feature extraction
-  PartD_Split_MRMR.ipynb                  – inter-patient DS1/DS2 split, MRMR, SMOTE
-  PartE_DeepModels.ipynb                  – 1D-CNN, LSTM, CNN-BiLSTM w/ dual attention
+  PartD_Split_MRMR.ipynb                  – inter-patient DS1/DS2 split, MRMR, S-SMOTE
+  PartE_DeepModels.ipynb                  – CNN, BiLSTM, CNN-BiLSTM w/ dual attention
   PartF_Ensemble_Optuna_SHAP.ipynb        – ensembling, Optuna tuning, SHAP, PTB-XL screening
   PartG_INCART_External_Validation.ipynb  – full external validation on INCART
 
@@ -68,7 +68,7 @@ Best run on Google Colab with a GPU (Part E onward needs one) — `Runtime → C
 ## Datasets
 
 - **MIT-BIH Arrhythmia Database** — 48 records, 47 subjects, 360 Hz. Used for training and the inter-patient test. Downloaded automatically in Part A via `wfdb`.
-- **INCART Database** — St. Petersburg 12-lead Arrhythmia Database. Used only in Part G, for external validation.
+- **INCART Database** — St. Petersburg 12-lead Arrhythmia Database, 75 records from 32 patients. Used only in Part G, for external validation.
 
 AAMI class mapping:
 
