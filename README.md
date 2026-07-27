@@ -1,5 +1,7 @@
 # CNN-BiLSTM-Dual-Attention-ECG-Classification
 
+### 📓 Open notebooks in Colab
+
 - [Part A — Setup](https://colab.research.google.com/github/rj05-ux/CNN-BiLSTM-Dual-Attention-ECG-Classification/blob/main/notebooks/PartA_Setup.ipynb)
 - [Part B — Preprocessing](https://colab.research.google.com/github/rj05-ux/CNN-BiLSTM-Dual-Attention-ECG-Classification/blob/main/notebooks/PartB_Preprocessing.ipynb)
 - [Part C — EMD Features](https://colab.research.google.com/github/rj05-ux/CNN-BiLSTM-Dual-Attention-ECG-Classification/blob/main/notebooks/PartC_EMD_Features.ipynb)
