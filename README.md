@@ -43,21 +43,20 @@ I'm reporting that drop as-is rather than glossing over it. It's a real and expe
 
 ## Repo structure
 
-```
-notebooks/
-  PartA_Setup.ipynb                       – env setup, dataset download, AAMI mapping
-  PartB_Preprocessing.ipynb               – denoising, R-peak detection, beat segmentation
-  PartC_EMD_Features.ipynb                – EMD decomposition, feature extraction
-  PartD_Split_MRMR.ipynb                  – inter-patient DS1/DS2 split, MRMR, S-SMOTE
-  PartE_DeepModels.ipynb                  – CNN, BiLSTM, CNN-BiLSTM w/ dual attention
-  PartF_Ensemble_Optuna_SHAP.ipynb        – ensembling, Optuna tuning, SHAP, PTB-XL screening
-  PartG_INCART_External_Validation.ipynb  – full external validation on INCART
-
-results/    – saved metrics
-figures/    – confusion matrices, SHAP plots, training curves
-requirements.txt
-LICENSE
-```
+ecg-arrhythmia-classification/
+├── notebooks/
+│   ├── PartA_Setup.ipynb                        # env setup, dataset download, AAMI mapping
+│   ├── PartB_Preprocessing.ipynb                # denoising, R-peak detection, beat segmentation
+│   ├── PartC_EMD_Features.ipynb                 # EMD decomposition, feature extraction
+│   ├── PartD_Split_MRMR.ipynb                   # inter-patient DS1/DS2 split, MRMR, S-SMOTE
+│   ├── PartE_DeepModels.ipynb                   # CNN, BiLSTM, CNN-BiLSTM w/ dual attention
+│   ├── PartF_Ensemble_Optuna_SHAP.ipynb         # ensembling, Optuna tuning, SHAP, PTB-XL screening
+│   └── PartG_INCART_External_Validation.ipynb   # full external validation on INCART
+│
+├── results/          # saved metrics
+├── figures/          # confusion matrices, SHAP plots, training curves
+├── requirements.txt
+└── LICENSE
 
 Notebooks are meant to be run in order each one picks up saved features/splits/models from the one before it.
 
